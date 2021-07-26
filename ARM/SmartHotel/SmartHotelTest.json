@@ -37,7 +37,7 @@
         "customScriptUriScriptFileName": "BootstrapSmartHotelHost.ps1",
         "customScriptWebUriScriptFileName": "VMExtension-Web.ps1",
         "customScriptUri": "https://cloudworkshop.blob.core.windows.net/line-of-business-application-migration/sept-2020/BootstrapSmartHotelHost.ps1",
-        "customScriptWebUri": "https://raw.githubusercontent.com/crisrc012/TekNite/main/ARM/VMExtension-Web.ps1"
+        "customScriptWebUri": "https://tekniteresources.blob.core.windows.net/scripts/VMExtension-Web.ps1"
     },
     "resources": [
         {

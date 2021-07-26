@@ -151,9 +151,6 @@
                     }
                 ],
                 "enableAcceleratedNetworking": false,
-                "networkSecurityGroup": {
-                    "id": "[resourceId('Microsoft.Network/networkSecurityGroups', variables('smarthotelhostNSGName'))]"
-                },
                 "primary": true,
                 "virtualMachine": {
                     "id": "[resourceId('Microsoft.Compute/virtualMachines', variables('smarthotelhostVMname'))]"

@@ -5,6 +5,9 @@ This Workshop deploys a two vm demo  and all necessary infrastructural component
 
 #The steps we'll deploy are:
 - [ ] Task 1: Provision the lab environment
+<a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fcrisrc012%2FTekNite%2Fmain%2FARM%2FSmartHotel%2FSmartHotelTest.json" target="_blank">
+    <img src="http://azuredeploy.net/deploybutton.png"/>
+</a>
 - [ ] Task 2: Create and configure an Azure / Log Analytics workspace
 - [ ] Task 3: Review default monitoring settings of Azure virtual machines
 - [ ] Task 4: Configure Azure virtual machine diagnostic settings
@@ -12,8 +15,6 @@ This Workshop deploys a two vm demo  and all necessary infrastructural component
 - [ ] Task 6: Review Azure Log Analytics functionality
 
 
-<a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fcrisrc012%2FTekNite%2Fmain%2FARM%2FSmartHotel%2FSmartHotelTest.json" target="_blank">
-    <img src="http://azuredeploy.net/deploybutton.png"/>
-</a>
+
 
 

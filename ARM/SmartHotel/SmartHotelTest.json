@@ -22,13 +22,11 @@
         "smarthotelhostVMname": "SmartHotelHost",
         "smarthotelhostNICname": "smarthotelhostnic",
         "smarthotelhostOSdisk": "[concat(variables('smarthotelhostVMname'),'_OsDisk')]",
-        "smarthotelhostDataDisk": "[concat(variables('smarthotelhostVMname'),'_DataDisk')]",
         "publicIPAddressName": "smarthotelhostip",
         "smarthotelVnetName": "smarthotelhostvnet",
         "smarthotelPrefix": "10.0.0.0/16",
         "smarthotelSubnetPrefix": "10.0.0.0/24",
         "smarthotelSubnetName": "hostsubnet",
-        "smarthotelhostNSGName": "smarthotelhostnsg",
         "customScriptWebUriScriptFileName": "VMExtension-Web.ps1",
         "customScriptWebUri": "https://raw.githubusercontent.com/crisrc012/TekNite/main/ARM/VMExtension-Web.ps1"
     },
@@ -85,7 +83,7 @@
             ],
             "resources": [
                 {
-                    "name": "CustomSciptExtension",
+                    "name": "CustomScriptExtension",
                     "type": "extensions",
                     "apiVersion": "2018-06-01",
                     "location": "[resourceGroup().location]",

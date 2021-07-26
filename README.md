@@ -1,6 +1,4 @@
 # TekNite
-![](/Images/tekniteimg.png "Hello World")
-
 # Deploy an Application on Azure using VMs 
 
 This template deploys a two tier demo application and all necessary infrastructural components. When deployed, the resulting resource group will contain a fully working. Deploy the Azure resource group and application using the below button. Once completed, the application can be access on the Azure public IP address assigned in the resource group. 

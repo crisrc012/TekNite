@@ -34,6 +34,7 @@
         "dmsSubnetPrefix": "10.1.0.0/24",
         "dmsSubnetName": "DMS",
         "customScriptFolder": "./sept-2020/",
+        "customScriptWebFolder": "./scripts/",
         "customScriptUriScriptFileName": "BootstrapSmartHotelHost.ps1",
         "customScriptWebUriScriptFileName": "VMExtension-Web.ps1",
         "customScriptUri": "https://cloudworkshop.blob.core.windows.net/line-of-business-application-migration/sept-2020/BootstrapSmartHotelHost.ps1",
@@ -110,7 +111,7 @@
                             "fileUris": [
                                 "[variables('customScriptWebUri')]"
                             ],
-                            "commandToExecute": "[concat('powershell -ExecutionPolicy Unrestricted -File ./', variables('customScriptWebUriScriptFileName'))]"
+                            "commandToExecute": "[concat('powershell -ExecutionPolicy Unrestricted -File ', variables('customScriptWebFolder'), '/', variables('customScriptWebUriScriptFileName'))]"
                         }
                     }
                 }

@@ -1,5 +1,5 @@
 {
-    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
         "adminUsername": {
@@ -38,7 +38,7 @@
         "customScriptUriScriptFileName": "BootstrapSmartHotelHost.ps1",
         "customScriptWebUriScriptFileName": "VMExtension-Web.ps1",
         "customScriptUri": "https://cloudworkshop.blob.core.windows.net/line-of-business-application-migration/sept-2020/BootstrapSmartHotelHost.ps1",
-        "customScriptWebUri": "https://tekniteresources.blob.core.windows.net/scripts/VMExtension-Web.ps1"
+        "customScriptWebUri": "https://raw.githubusercontent.com/crisrc012/TekNite/main/ARM/VMExtension-Web.ps1"
     },
     "resources": [
         {
@@ -94,24 +94,21 @@
                 {
                     "name": "CustomSciptExtension",
                     "type": "extensions",
-                    "apiVersion": "2016-03-30",
+                    "apiVersion": "2018-06-01",
                     "location": "[resourceGroup().location]",
                     "dependsOn": [
                         "[resourceId('Microsoft.Compute/virtualMachines', variables('smarthotelhostVMname'))]"
                     ],
-                    "tags": {
-                        "displayName": "ConfigureHost"
-                    },
                     "properties": {
                         "publisher": "Microsoft.Compute",
                         "type": "CustomScriptExtension",
-                        "typeHandlerVersion": "1.4",
-                        "autoUpgradeMinorVersion": false,
+                        "typeHandlerVersion": "1.10",
+                        "autoUpgradeMinorVersion": true,
                         "settings": {
                             "fileUris": [
                                 "[variables('customScriptWebUri')]"
                             ],
-                            "commandToExecute": "[concat('powershell -ExecutionPolicy Unrestricted -File ', variables('customScriptWebFolder'), '/', variables('customScriptWebUriScriptFileName'))]"
+                            "commandToExecute": "[concat('powershell -ExecutionPolicy Unrestricted -File ',variables('customScriptWebUriScriptFileName'))]"
                         }
                     }
                 }

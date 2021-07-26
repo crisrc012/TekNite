@@ -29,15 +29,7 @@
         "smarthotelSubnetPrefix": "10.0.0.0/24",
         "smarthotelSubnetName": "hostsubnet",
         "smarthotelhostNSGName": "smarthotelhostnsg",
-        "dmsVnetName": "DMSvnet",
-        "dmsPrefix": "10.1.0.0/16",
-        "dmsSubnetPrefix": "10.1.0.0/24",
-        "dmsSubnetName": "DMS",
-        "customScriptFolder": "./sept-2020/",
-        "customScriptWebFolder": "./scripts/",
-        "customScriptUriScriptFileName": "BootstrapSmartHotelHost.ps1",
         "customScriptWebUriScriptFileName": "VMExtension-Web.ps1",
-        "customScriptUri": "https://cloudworkshop.blob.core.windows.net/line-of-business-application-migration/sept-2020/BootstrapSmartHotelHost.ps1",
         "customScriptWebUri": "https://raw.githubusercontent.com/crisrc012/TekNite/main/ARM/VMExtension-Web.ps1"
     },
     "resources": [
@@ -48,6 +40,7 @@
             "location": "[resourceGroup().location]",
             "tags": {},
             "properties": {
+                "licenseType": "Windows_Server",
                 "hardwareProfile": {
                     "vmSize": "Standard_B1ms"
                 },

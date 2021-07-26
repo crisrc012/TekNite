@@ -2,7 +2,7 @@
 <dl>
   <dt>Markdown in HTML</dt>
   <dd>Does *not* work **very** well. HTML tags work, in most cases.</dd>
-<div style="background-image: url('/Images/tekniteimg.png');">
+<div style="background-image: url('https://github.com/crisrc012/TekNite/blob/main/Images/tekniteimg.png');">
 You can specify background images<br>
 for any visible HTML element.<br>
 In this example, the background image<br>

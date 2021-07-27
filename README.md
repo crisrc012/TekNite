@@ -14,9 +14,9 @@ En este TekNite se van a implementar 2 VM, con la aplicación `SmartHotel` de Mi
 > Nota: Puede tardar alrededor de 15 minutos, una vez finalizada la implementación se debe de reiniciar la máquina virtual `smarthotelsql`, desde el portal de Azure, para que finalice la configuración automática.
 - [x] Tarea 2: Crear y configurar Azure Log Analytics Workspace
 
-1. En Azure portal, buscar y seleccionar `Log Analytics workspaces`, en el menú `Log Analytics workspaces`, click `+ Add`.
+1. En Azure portal, buscar y seleccionar `Log Analytics workspaces`, hacer click en `+ Create`.
 
-2. En la pestaña `Basics` the Create Log Analytics workspace blade, the following settings, click Review + Create and then click Create:
+2. En el formulario `Create Log Analytics workspace`, usar el `Resource Group` creado anteriormente, usar la misma región de los recursos creados anteriormente, elegir un nombre. Hacer clock en `Review + Create`.
 
 - [x] Tarea 3: Revisar la configuración de monitoreo por defecto de máquinas virtuales de Azure
 - [x] Tarea 4: Configurar la configuración de diagnóstico de máquinas virtuales de Azure

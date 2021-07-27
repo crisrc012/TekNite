@@ -8,6 +8,7 @@ En este TekNite se van a implementar 2 VM, con la aplicación "SmartHotel" de Mi
 <a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fcrisrc012%2FTekNite%2Fmain%2FARM%2FSmartHotel%2FSmartHotelTest.json" target="_blank">
     <img src="http://azuredeploy.net/deploybutton.png"/></a>
 
+> Nota: Puede tardar alrededor de 15 minutos
 - [x] Tarea 2: Crear y configurar Azure Log Analytics Workspace
 - [x] Tarea 3: Revisar la configuración de monitoreo por defecto de máquinas virtuales de Azure
 - [x] Tarea 4: Configurar la configuración de diagnóstico de máquinas virtuales de Azure

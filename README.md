@@ -19,8 +19,9 @@ En este TekNite se van a implementar 2 VM, con la aplicación `SmartHotel` de Mi
 3. En los recursos de máquina virtual, ir a la sección `Monitoring` y luego a la opción `Logs`, y hacer click en `Enable`. Seleccionar nuestra suscripción y el `Log Analitics Workspace` creado en el paso anterior. Hacerlo para ambas máquinas virtuales.
 
 - [x] Tarea 3: Revisar la configuración de monitoreo por defecto de máquinas virtuales de Azure.
-1. En los recursos de máquina virtual, ir a la sección `Monitoring` y luego a la opción `Metrics`, verificar que `Metric Namespace` sea `Virtual Machine Host`, en `Metric`, el valor sea `Percentage CPU` y en `Aggrgation` sea `Avg`.
-- [x] Tarea 4: Configurar la configuración de diagnóstico de máquinas virtuales de Azure.
+1. En los recursos de máquina virtual, ir a la sección `Monitoring` y luego a la opción `Metrics`.
+2. verificar que `Metric Namespace` sea `Virtual Machine Host`, en `Metric`, el valor sea `Percentage CPU` y en `Aggrgation` sea `Avg`.
+- [x] Tarea 4: Configurar el diagnóstico de máquinas virtuales de Azure.
 - [x] Tarea 5: Revisar las funcionalidad de Azure Monitor.
 - [x] Tarea 6: Revisar las funcionalidad de Azure Log Analytics.
 

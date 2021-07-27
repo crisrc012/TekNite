@@ -357,7 +357,7 @@
                     "apiVersion": "2018-06-01",
                     "location": "[resourceGroup().location]",
                     "dependsOn": [
-                        "[resourceId('Microsoft.Compute/virtualMachines', variables('smarthotelsqlVMname'))]"
+                        "[resourceId('Microsoft.SqlVirtualMachine/SqlVirtualMachines', variables('smarthotelsqlVMname'))]"
                     ],
                     "properties": {
                         "publisher": "Microsoft.Compute",
@@ -371,7 +371,7 @@
                             "commandToExecute": "[concat('powershell -ExecutionPolicy Unrestricted -File ',variables('customScriptSqlUriScriptFileName'))]"
                         }
                     }
-                }
+                },
             ]
         },
         {

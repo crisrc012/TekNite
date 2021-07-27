@@ -9,9 +9,8 @@ Invoke-WebRequest -Uri "https://raw.githubusercontent.com/crisrc012/TekNite/main
 # Se usa para validar que esté disponible el SQL
 while($true) {
     Start-Sleep -Seconds 3
-    if(Get-Service -Name MSSQLSERVER) {
-        Start-Sleep -Seconds 60
-        Get-Service -Name MSSQLSERVER
+    if((Get-Service -Name MSSQLSERVER).Status -eq "Running") {
+        Start-Sleep -Seconds 120
         # Se habilitar el modo de Login Mixto
         Set-ItemProperty -Path "HKLM:\Software\Microsoft\Microsoft SQL Server\MSSQL14.MSSQLSERVER\MSSQLServer" -Name "LoginMode" -Value 2 -Force
 

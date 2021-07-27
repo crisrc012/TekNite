@@ -1,5 +1,7 @@
-# Instalar IIS
-Install-WindowsFeature -name Web-Server -IncludeManagementTools
+# Instalar Dependencias
+Get-WindowsFeature -Name "Web-*" | Install-WindowsFeature
+
+
 
 # Crear Sitio
 #Remove-Item -Path C:\inetpub\wwwroot\* -Recurse -Force

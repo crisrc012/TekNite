@@ -5,7 +5,7 @@ En este TekNite se van a implementar 2 VM, con la aplicación "SmartHotel" de Mi
 
 ### Pasos para la implementación:
 - [x] Tarea 1: Implementación del ambiente de laboratorio
-<a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fcrisrc012%2FTekNite%2Fmain%2FARM%2FSmartHotel%2FSmartHotelTest.json" target="_blank">
+<a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fcrisrc012%2FTekNite%2Fmain%2FARM%2FSmartHotel%2FSmartHotel.json" target="_blank">
     <img src="http://azuredeploy.net/deploybutton.png"/></a>
 
 > Nota: Puede tardar alrededor de 15 minutos

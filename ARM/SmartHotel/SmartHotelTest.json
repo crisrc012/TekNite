@@ -19,21 +19,31 @@
         }
     },
     "variables": {
-        "smarthotelhostVMname": "SmartHotelHost",
-        "smarthotelhostNICname": "smarthotelhostnic",
-        "smarthotelhostOSdisk": "[concat(variables('smarthotelhostVMname'),'_OsDisk')]",
-        "publicIPAddressName": "smarthotelhostip",
-        "smarthotelVnetName": "smarthotelhostvnet",
-        "smarthotelPrefix": "10.0.0.0/16",
-        "smarthotelSubnetPrefix": "10.0.0.0/24",
+        "smarthotelwebVMname": "smarthotelweb",
+        "smarthotelsqlVMname": "smarthotelsql",
+        "smarthotelwebNICname": "smarthotelwebnic",
+        "smarthotelsqlNICname": "smarthotelsqlnic",
+        "smarthotelwebOSdisk": "[concat(variables('smarthotelwebVMname'),'_OsDisk')]",
+        "smarthotelsqlOSdisk": "[concat(variables('smarthotelsqlVMname'),'_OsDisk')]",
+        "smarthotelsqldataDisk": "[concat(variables('smarthotelsqlVMname'),'_dataDisk')]",
+        "smarthotelsqllogDisk": "[concat(variables('smarthotelsqlVMname'),'_logDisk')]",
+        "publicIPAddresswebName": "smarthotelwebip",
+        "publicIPAddresssqlName": "smarthotelsqlip",
+        "privateIPAddresswebName": "192.168.0.4",
+        "privateIPAddresssqlName": "192.168.0.6",
+        "smarthotelVnetName": "smarthotelvnet",
+        "smarthotelPrefix": "192.168.0.0/16",
+        "smarthotelSubnetPrefix": "192.168.0.0/24",
         "smarthotelSubnetName": "hostsubnet",
         "customScriptWebUriScriptFileName": "VMExtension-Web.ps1",
-        "customScriptWebUri": "https://raw.githubusercontent.com/crisrc012/TekNite/main/ARM/VMExtension-Web.ps1"
+        "customScriptSqlUriScriptFileName": "VMExtension-SQL.ps1",
+        "customScriptWebUri": "https://raw.githubusercontent.com/crisrc012/TekNite/main/ARM/VMExtension-Web.ps1",
+        "customScriptSqlUri": "https://raw.githubusercontent.com/crisrc012/TekNite/main/ARM/VMExtension-SQL.ps1"
     },
     "resources": [
         {
             "type": "Microsoft.Compute/virtualMachines",
-            "name": "[variables('smarthotelhostVMname')]",
+            "name": "[variables('smarthotelwebVMname')]",
             "apiVersion": "2018-06-01",
             "location": "[resourceGroup().location]",
             "tags": {},
@@ -51,7 +61,7 @@
                     },
                     "osDisk": {
                         "osType": "Windows",
-                        "name": "[variables('smarthotelhostOSdisk')]",
+                        "name": "[variables('smarthotelwebOSdisk')]",
                         "createOption": "FromImage",
                         "caching": "ReadWrite",
                         "managedDisk": {
@@ -61,7 +71,7 @@
                     }
                 },
                 "osProfile": {
-                    "computerName": "[variables('smarthotelhostVMname')]",
+                    "computerName": "[variables('smarthotelwebVMname')]",
                     "adminUsername": "[parameters('adminUsername')]",
                     "adminPassword": "[parameters('adminPassword')]",
                     "windowsConfiguration": {
@@ -73,13 +83,13 @@
                 "networkProfile": {
                     "networkInterfaces": [
                         {
-                            "id": "[resourceId('Microsoft.Network/networkInterfaces', variables('smarthotelhostNICname'))]"
+                            "id": "[resourceId('Microsoft.Network/networkInterfaces', variables('smarthotelwebNICname'))]"
                         }
                     ]
                 }
             },
             "dependsOn": [
-                "[variables('smarthotelhostNICname')]"
+                "[variables('smarthotelwebNICname')]"
             ],
             "resources": [
                 {
@@ -88,7 +98,7 @@
                     "apiVersion": "2018-06-01",
                     "location": "[resourceGroup().location]",
                     "dependsOn": [
-                        "[resourceId('Microsoft.Compute/virtualMachines', variables('smarthotelhostVMname'))]"
+                        "[resourceId('Microsoft.Compute/virtualMachines', variables('smarthotelwebVMname'))]"
                     ],
                     "properties": {
                         "publisher": "Microsoft.Compute",
@@ -107,7 +117,7 @@
         },
         {
             "type": "Microsoft.Network/networkInterfaces",
-            "name": "[variables('smarthotelhostNICname')]",
+            "name": "[variables('smarthotelwebNICname')]",
             "apiVersion": "2018-08-01",
             "location": "[resourceGroup().location]",
             "tags": {},
@@ -116,9 +126,10 @@
                     {
                         "name": "ipconfig1",
                         "properties": {
-                            "privateIPAllocationMethod": "Dynamic",
+                            "privateIPAllocationMethod": "Static",
+                            "privateIPAddress": "[variables('privateIPAddresswebName')]",
                             "publicIPAddress": {
-                                "id": "[resourceId('Microsoft.Network/publicIPAddresses', variables('publicIPAddressName'))]"
+                                "id": "[resourceId('Microsoft.Network/publicIPAddresses', variables('publicIPAddresswebName'))]"
                             },
                             "subnet": {
                                 "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', variables('smarthotelVnetName'), variables('smarthotelSubnetname'))]"
@@ -131,11 +142,11 @@
                 "enableAcceleratedNetworking": false,
                 "primary": true,
                 "virtualMachine": {
-                    "id": "[resourceId('Microsoft.Compute/virtualMachines', variables('smarthotelhostVMname'))]"
+                    "id": "[resourceId('Microsoft.Compute/virtualMachines', variables('smarthotelwebVMname'))]"
                 }
             },
             "dependsOn": [
-                "[variables('publicIPAddressName')]",
+                "[variables('publicIPAddresswebName')]",
                 "[variables('smarthotelVnetName')]"
             ]
         },
@@ -145,7 +156,7 @@
                 "name": "Basic",
                 "tier": "Regional"
             },
-            "name": "[variables('publicIPAddressName')]",
+            "name": "[variables('publicIPAddresswebName')]",
             "apiVersion": "2018-08-01",
             "location": "[resourceGroup().location]",
             "tags": {},
@@ -154,7 +165,7 @@
                 "publicIPAllocationMethod": "Dynamic",
                 "idleTimeoutInMinutes": 4,
                 "dnsSettings": {
-                    "domainNameLabel": "[toLower(concat(variables('smarthotelhostVMname'), '-', substring(uniqueString(resourceGroup().id),0,4)))]"
+                    "domainNameLabel": "[toLower(concat(variables('smarthotelwebVMname'), '-', substring(uniqueString(resourceGroup().id),0,4)))]"
                 },
                 "ipTags": []
             }
@@ -180,6 +191,242 @@
                     }
                 ]
             }
+        },
+        {
+            "type": "Microsoft.Network/networkInterfaces",
+            "name": "[variables('smarthotelsqlNICname')]",
+            "apiVersion": "2018-08-01",
+            "location": "[resourceGroup().location]",
+            "tags": {},
+            "properties": {
+                "ipConfigurations": [
+                    {
+                        "name": "ipconfig1",
+                        "properties": {
+                            "privateIPAllocationMethod": "Static",
+                            "privateIPAddress": "[variables('privateIPAddresssqlName')]",
+                            "publicIPAddress": {
+                                "id": "[resourceId('Microsoft.Network/publicIPAddresses', variables('publicIPAddresssqlName'))]"
+                            },
+                            "subnet": {
+                                "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', variables('smarthotelVnetName'), variables('smarthotelSubnetname'))]"
+                            },
+                            "primary": true,
+                            "privateIPAddressVersion": "IPv4"
+                        }
+                    }
+                ],
+                "enableAcceleratedNetworking": false,
+                "primary": true,
+                "virtualMachine": {
+                    "id": "[resourceId('Microsoft.Compute/virtualMachines', variables('smarthotelsqlVMname'))]"
+                }
+            },
+            "dependsOn": [
+                "[variables('publicIPAddresssqlName')]",
+                "[variables('smarthotelVnetName')]"
+            ]
+        },
+        {
+            "type": "Microsoft.Network/publicIPAddresses",
+            "sku": {
+                "name": "Basic",
+                "tier": "Regional"
+            },
+            "name": "[variables('publicIPAddresssqlName')]",
+            "apiVersion": "2018-08-01",
+            "location": "[resourceGroup().location]",
+            "properties": {
+                "publicIPAddressVersion": "IPv4",
+                "publicIPAllocationMethod": "Dynamic",
+                "idleTimeoutInMinutes": 4,
+                "dnsSettings": {
+                    "domainNameLabel": "[toLower(concat(variables('smarthotelsqlVMname'), '-', substring(uniqueString(resourceGroup().id),0,4)))]"
+                }
+            }
+        },
+        {
+            "type": "Microsoft.Compute/disks",
+            "name": "[variables('smarthotelsqldataDisk')]",
+            "apiVersion": "2020-12-01",
+            "location": "[resourceGroup().location]",
+            "sku": {
+                "name": "Premium_LRS"
+            },
+            "properties": {
+                "creationData": {
+                    "createOption": "Empty"
+                },
+                "diskSizeGB": 127
+            }
+        },
+        {
+            "type": "Microsoft.Compute/disks",
+            "name": "[variables('smarthotelsqllogDisk')]",
+            "apiVersion": "2020-12-01",
+            "location": "[resourceGroup().location]",
+            "sku": {
+                "name": "Premium_LRS"
+            },
+            "properties": {
+                "creationData": {
+                    "createOption": "Empty"
+                },
+                "diskSizeGB": 127
+            }
+        },
+        {
+            "name": "[variables('smarthotelsqlVMname')]",
+            "type": "Microsoft.Compute/virtualMachines",
+            "apiVersion": "2021-03-01",
+            "location": "[resourceGroup().location]",
+            "dependsOn": [
+                "[variables('smarthotelsqldataDisk')]",
+                "[variables('smarthotelsqllogDisk')]",
+                "[concat('Microsoft.Network/networkInterfaces/', variables('smarthotelsqlNICName'))]"
+            ],
+            "properties": {
+                "hardwareProfile": {
+                    "vmSize": "Standard_B2s"
+                },
+                "storageProfile": {
+                    "osDisk": {
+                        "osType": "Windows",
+                        "name": "[variables('smarthotelsqlOSdisk')]",
+                        "createOption": "FromImage",
+                        "caching": "ReadWrite",
+                        "managedDisk": {
+                            "storageAccountType": "Premium_LRS"
+                        },
+                        "diskSizeGB": 127
+                    },
+                    "imageReference": {
+                        "publisher": "MicrosoftSQLServer",
+                        "offer": "SQL2017-WS2016",
+                        "sku": "standarddbengineonly",
+                        "version": "latest"
+                    },
+                    "dataDisks": [
+                        {
+                            "lun": 0,
+                            "name": "[variables('smarthotelsqldataDisk')]",
+                            "createOption": "Attach",
+                            "caching": "None",
+                            "managedDisk": {
+                                "id": "[resourceId('Microsoft.Compute/disks/', variables('smarthotelsqldataDisk'))]"
+                            }
+                        },
+                        {
+                            "lun": 1,
+                            "name": "[variables('smarthotelsqllogDisk')]",
+                            "createOption": "Attach",
+                            "caching": "None",
+                            "managedDisk": {
+                                "id": "[resourceId('Microsoft.Compute/disks/', variables('smarthotelsqllogDisk'))]"
+                            }
+                        }
+                    ]
+                },
+                "networkProfile": {
+                    "networkInterfaces": [
+                        {
+                            "id": "[resourceId('Microsoft.Network/networkInterfaces', variables('smarthotelsqlNICname'))]"
+                        }
+                    ]
+                },
+                "osProfile": {
+                    "computerName": "[variables('smarthotelsqlVMname')]",
+                    "adminUsername": "[parameters('adminUsername')]",
+                    "adminPassword": "[parameters('adminPassword')]",
+                    "windowsConfiguration": {
+                        "enableAutomaticUpdates": true,
+                        "provisionVmAgent": true
+                        
+                    }
+                },
+                "diagnosticsProfile": {
+                    "bootDiagnostics": {
+                        "enabled": true
+                    }
+                }
+            },
+            "resources": [
+                {
+                    "name": "CustomScriptExtension",
+                    "type": "extensions",
+                    "apiVersion": "2018-06-01",
+                    "location": "[resourceGroup().location]",
+                    "dependsOn": [
+                        "[resourceId('Microsoft.Compute/virtualMachines', variables('smarthotelsqlVMname'))]"
+                    ],
+                    "properties": {
+                        "publisher": "Microsoft.Compute",
+                        "type": "CustomScriptExtension",
+                        "typeHandlerVersion": "1.10",
+                        "autoUpgradeMinorVersion": true,
+                        "settings": {
+                            "fileUris": [
+                                "[variables('customScriptSqlUri')]"
+                            ],
+                            "commandToExecute": "[concat('powershell -ExecutionPolicy Unrestricted -File ',variables('customScriptSqlUriScriptFileName'))]"
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "name": "[variables('smarthotelsqlVMname')]",
+            "type": "Microsoft.SqlVirtualMachine/SqlVirtualMachines",
+            "apiVersion": "2017-03-01-preview",
+            "location": "[resourceGroup().location]",
+            "properties": {
+                "virtualMachineResourceId": "[resourceId('Microsoft.Compute/virtualMachines', variables('smarthotelsqlVMname'))]",
+                "sqlManagement": "Full",
+                "SqlServerLicenseType": "PAYG",
+                "AutoPatchingSettings": {
+                    "Enable": true,
+                    "DayOfWeek": "Sunday",
+                    "MaintenanceWindowStartingHour": 2,
+                    "MaintenanceWindowDuration": 60
+                },
+                "KeyVaultCredentialSettings": {
+                    "Enable": false,
+                    "CredentialName": ""
+                },
+                "StorageConfigurationSettings": {
+                    "DiskConfigurationType": "NEW",
+                    "StorageWorkloadType": "OLTP",
+                    "SQLDataSettings": {
+                        "LUNs": [
+                            0
+                        ],
+                        "DefaultFilePath": "F:\\data"
+                    },
+                    "SQLLogSettings": {
+                        "LUNs": [
+                            1
+                        ],
+                        "DefaultFilePath": "G:\\log"
+                    },
+                    "SQLTempDbSettings": {
+                        "DefaultFilePath": "D:\\tempDb"
+                    }
+                },
+                "ServerConfigurationsManagementSettings": {
+                    "SQLConnectivityUpdateSettings": {
+                        "ConnectivityType": "Private",
+                        "Port": 1433,
+                        "SQLAuthUpdateUserName": "",
+                        "SQLAuthUpdatePassword": ""
+                    },
+                    "AdditionalFeaturesServerConfigurations": {
+                        "IsRServicesEnabled": "false"
+                    }
+                }
+            },
+            "dependsOn": [
+                "[resourceId('Microsoft.Compute/virtualMachines', variables('smarthotelsqlVMname'))]"
+            ]
         }
     ]
 }

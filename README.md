@@ -22,6 +22,8 @@ En este TekNite se van a implementar 2 VM, con la aplicación `SmartHotel` de Mi
 1. En los recursos de máquina virtual, ir a la sección `Monitoring` y luego a la opción `Metrics`.
 2. verificar que `Metric Namespace` sea `Virtual Machine Host`, en `Metric`, el valor sea `Percentage CPU` y en `Aggrgation` sea `Avg`.
 - [x] Tarea 4: Configurar el diagnóstico de máquinas virtuales de Azure.
+1. En los recursos de máquina virtual, ir a la sección `Monitoring` y luego a la opción `Diagnostic settings`, y hacer click en `Enable guest-level monitoring`.
+2. Ir a la pestaña `Performance counters` y revisar los contadores disponibles.
 - [x] Tarea 5: Revisar las funcionalidad de Azure Monitor.
 - [x] Tarea 6: Revisar las funcionalidad de Azure Log Analytics.
 

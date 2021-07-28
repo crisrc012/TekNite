@@ -58,4 +58,4 @@ Registrar los proveedores de recursos en Azure Cloud Shell (Powershell)
 7. Entrar a ambas máquinas virtuales vía RDP y ejecutar en `CMD`, `for /l %a in (0,0,1) do echo a`, para elevar el uso de CPU.
 
 - [x] Tarea 6: Revisar las funcionalidad de Azure Log Analytics.
-1. Revisar las consultas disponibles.
+1. Revisar las consultas disponibles, en Azure Monitor.

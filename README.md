@@ -13,7 +13,7 @@ En este TekNite se van a implementar 2 VM, con la aplicación `SmartHotel` de Mi
 
 > Nota: Puede tardar alrededor de 15 minutos, una vez finalizada la implementación se debe de reiniciar la máquina virtual `smarthotelsql`, desde el portal de Azure, para que finalice la configuración automática.
 
-Registrar los proveedores de recursos en Azure Cloud Shell (Bash)
+Registrar los proveedores de recursos en Azure Cloud Shell (Powershell)
 
 `Register-AzResourceProvider -ProviderNamespace Microsoft.Insights`
 

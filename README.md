@@ -51,8 +51,4 @@ En este TekNite se van a implementar 2 VM, con la aplicación `SmartHotel` de Mi
 7. Entrar a ambas máquinas virtuales y ejecutar en `CMD`, `for /l %a in (0,0,1) do echo a`, para elevar el uso de CPU.
 
 - [x] Tarea 6: Revisar las funcionalidad de Azure Log Analytics.
-
-
-
-
-
+1. Revisar las consultas disponibles.

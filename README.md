@@ -12,6 +12,13 @@ En este TekNite se van a implementar 2 VM, con la aplicación `SmartHotel` de Mi
     <img src="http://azuredeploy.net/deploybutton.png"/></a>
 
 > Nota: Puede tardar alrededor de 15 minutos, una vez finalizada la implementación se debe de reiniciar la máquina virtual `smarthotelsql`, desde el portal de Azure, para que finalice la configuración automática.
+
+Registrar los proveedores de recursos en Azure Cloud Shell (Bash)
+
+`Register-AzResourceProvider -ProviderNamespace Microsoft.Insights`
+
+`Register-AzResourceProvider -ProviderNamespace Microsoft.AlertsManagement`
+
 - [x] Tarea 2: Crear y configurar Azure Log Analytics Workspace.
 
 1. En Azure portal, buscar y seleccionar `Log Analytics workspaces`, hacer click en `+ Create`.
